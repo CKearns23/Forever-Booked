@@ -258,7 +258,7 @@ button.next {
     width: 150px;
     height: 200px;
     border-radius: 10px;
-    background-color: #fff;
+    background-color: #efe5dc;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
