@@ -147,9 +147,10 @@ function initializeGenreCarousel(carouselSelector, cardWidth = 150, gap = 20) {
     carousel.querySelector('.prev').addEventListener('click', prevCarousel);
 }
 
-
 // Book recommendation chatbot
 let currentStep = 0; // Keeps track of the current step in the conversation
+
+// Declare recommendations once and use it throughout the code
 let recommendations = {}; // Initialize an empty object to store book recommendations
 
 // Fetch book data from the JSON file
@@ -211,67 +212,109 @@ function addChatMessage(message) {
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
-// Search authors
-document.getElementById('search-authors').addEventListener('input', function () {
+// Function to handle search
+document.getElementById('search').addEventListener('input', function() {
     const searchQuery = this.value.toLowerCase();
-    const authorsList = document.getElementById('authors-list');
-    const allLists = authorsList.querySelectorAll('ul');
 
-    allLists.forEach(list => {
-        let hasVisibleItems = false;
-        const items = list.querySelectorAll('li');
+    if (!searchQuery) {
+        displaySearchResults({ books: [], authors: [], genres: [] });
+        return; // No input, no need to search
+    }
 
-        items.forEach(item => {
-            const authorName = item.textContent.toLowerCase();
-            if (authorName.includes(searchQuery)) {
-                item.style.display = ''; // Show item
-                hasVisibleItems = true;
-            } else {
-                item.style.display = 'none'; // Hide item
+    const searchResults = {
+        books: [],
+        authors: new Set(), // Use Set to avoid duplicates
+        genres: new Set() // Use Set to avoid duplicates
+    };
+
+    // Loop through the genres and their books once data is loaded
+    Object.keys(recommendations).forEach(genre => {
+        recommendations[genre].forEach(book => {
+            // Search through books and authors
+            if (book.title.toLowerCase().includes(searchQuery)) {
+                searchResults.books.push(book);
+            }
+            if (book.author.toLowerCase().includes(searchQuery)) {
+                searchResults.authors.add(book.author); // Use Set for authors
             }
         });
 
-        // Show/hide the category header based on visible items in the list
-        const categoryHeader = list.previousElementSibling;
-        if (hasVisibleItems) {
-            categoryHeader.style.display = '';
-        } else {
-            categoryHeader.style.display = 'none';
+        // Search through genres
+        if (genre.toLowerCase().includes(searchQuery)) {
+            searchResults.genres.add(genre); // Use Set for genres
         }
     });
+
+    // Convert Sets back to arrays for display
+    searchResults.authors = Array.from(searchResults.authors);
+    searchResults.genres = Array.from(searchResults.genres);
+
+    // Display results
+    displaySearchResults(searchResults);
 });
+
+// Function to display search results
+function displaySearchResults(results) {
+    const resultsContainer = document.getElementById('search-results');
+    resultsContainer.innerHTML = ''; // Clear previous results
+
+    // Display books
+    if (results.books.length > 0) {
+        const booksList = document.createElement('ul');
+        results.books.forEach(book => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${book.title} by ${book.author}`;
+            booksList.appendChild(listItem);
+        });
+        resultsContainer.appendChild(booksList);
+    } else {
+        const noBooksMessage = document.createElement('p');
+        noBooksMessage.textContent = 'No books found.';
+        resultsContainer.appendChild(noBooksMessage);
+    }
+
+    // Display authors
+    if (results.authors.length > 0) {
+        const authorsList = document.createElement('ul');
+        results.authors.forEach(author => {
+            const listItem = document.createElement('li');
+            listItem.textContent = author;
+            authorsList.appendChild(listItem);
+        });
+        resultsContainer.appendChild(authorsList);
+    } else {
+        const noAuthorsMessage = document.createElement('p');
+        noAuthorsMessage.textContent = 'No authors found.';
+        resultsContainer.appendChild(noAuthorsMessage);
+    }
+
+    // Display genres
+    if (results.genres.length > 0) {
+        const genresList = document.createElement('ul');
+        results.genres.forEach(genre => {
+            const listItem = document.createElement('li');
+            listItem.textContent = genre;
+            genresList.appendChild(listItem);
+        });
+        resultsContainer.appendChild(genresList);
+    } else {
+        const noGenresMessage = document.createElement('p');
+        noGenresMessage.textContent = 'No genres found.';
+        resultsContainer.appendChild(noGenresMessage);
+    }
+}
 
 // This listens for the form submission event
 document.getElementById('review-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevents the default form behavior (so Netlify can handle submission)
-    
-    // Show the "Thank You" message and hide the form
-    document.getElementById('thank-you-message').style.display = 'block';
-    document.getElementById('review-form').style.display = 'none';
+    event.preventDefault(); // Prevents form from submitting the traditional way
 
-    // Optionally reset the form after submission
-    setTimeout(function() {
-        document.getElementById('review-form').reset(); // Reset the form fields
-        document.getElementById('thank-you-message').style.display = 'none'; // Hide the thank you message
-    }, 3000); // Hide the thank you message after 3 seconds
+    const userReview = document.getElementById('user-review').value; // Get the user's review
+    const newReview = document.createElement('p'); // Creates a new paragraph element
+    newReview.textContent = userReview; // Sets the text of the new review to what the user typed
+
+    // Append the new review to the reviews section
+    document.getElementById('reviews-section').appendChild(newReview);
+
+    // Clear the input field after submission
+    document.getElementById('user-review').value = '';
 });
-
-// Function to display reviews
-function displayReviews() {
-    const reviewsList = document.getElementById('reviews-list');
-    reviewsList.innerHTML = ''; // Clear current list
-
-    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
-    reviews.forEach(review => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            <strong>${review.bookTitle}</strong> by <em>${review.authorName}</em> <br>
-            ${review.reviewText} <br>
-            <small>Rating: ${review.rating} | Reviewed on: ${review.date}</small>
-        `;
-        reviewsList.appendChild(listItem);
-    });
-}
-
-// Display reviews on page load
-document.addEventListener('DOMContentLoaded', displayReviews);
