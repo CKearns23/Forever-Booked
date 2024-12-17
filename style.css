@@ -257,7 +257,7 @@ button.next {
 .card-author {
     width: 150px;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: #efe5dc;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     display: flex;
@@ -279,7 +279,6 @@ button.next {
     font-size: 1.1em;
     margin: 10px 0; /* Add spacing between image and text */
 }
-
 
 .explore-more {
     margin-top: 20px;
