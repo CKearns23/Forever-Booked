@@ -10,35 +10,38 @@
 </head>
 
 <body>
-<header>
-    <div class="logo">
-        <a href="index.html">Forever Booked</a>
-    </div>
-    <div class="nav-bar">
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="explore.html">Explore</a>
-        </nav>
-    </div>
-</header>
+    <header>
+        <div class="logo">
+            <a href="index.html">Forever Booked</a>
+        </div>
+        <div class="nav-bar">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="explore.html">Explore</a>
+            </nav>
+        </div>
+    </header>
 
     <section>
         <div class="hero-section">
             <div class="slider">
                 <div class="slides">
                     <img src="Images/newreleases.jpg" alt="New Releases">
-                    <img src="Images/bookofthemonth.jpg" alt="Book of the Month- The Teacher by Freida McFadden>
+                    <img src="Images/bookofthemonth.jpg" alt="Book of the Month - The Teacher by Freida McFadden">
                 </div>
-                <button class=" prev" onclick="prevSlide()">&#10094;</button>
+                <div>
+                    <button class="prev" onclick="prevSlide()">&#10094;</button>
                     <button class="next" onclick="nextSlide()">&#10095;</button>
                 </div>
             </div>
+        </div>
     </section>
+    
 
     <section id="voting-section" class="voting-section">
         <div class="container">
             <h2>Vote for the Book of the Month!</h2>
-    
+
             <!-- Book 1 -->
             <div class="voting-box" id="book1">
                 <div class="book-details">
@@ -50,7 +53,7 @@
                     <p id="book1-votes" class="vote-count">0</p>
                 </div>
             </div>
-    
+
             <!-- Book 2 -->
             <div class="voting-box" id="book2">
                 <div class="book-details">
@@ -62,7 +65,7 @@
                     <p id="book2-votes" class="vote-count">0</p>
                 </div>
             </div>
-    
+
             <!-- Book 3 -->
             <div class="voting-box" id="book3">
                 <div class="book-details">
@@ -76,7 +79,7 @@
             </div>
         </div>
     </section>
-    
+
 
     <section class="latest-reviews">
         <h1>Latest Reviews</h1>
@@ -136,86 +139,86 @@
         </div>
     </section>
 
-<!-- Popular Genres Section -->
-<section id="popular-genres" class="popular-genres">
-    <h2>Popular Genres</h2>
+    <!-- Popular Genres Section -->
+    <section id="popular-genres" class="popular-genres">
+        <h2>Popular Genres</h2>
 
-    <!-- Carousel for cards -->
-    <div id="genre-carousel" class="carousel">
-        <div class="carousel-cards">
-            <div class="carousel-card-genre">Romance</div>
-            <div class="carousel-card-genre">Dark Romance</div>
-            <div class="carousel-card-genre">Mystery</div>
-            <div class="carousel-card-genre">Thriller</div>
-            <div class="carousel-card-genre">Horror</div>
-            <div class="carousel-card-genre">Fantasy</div>
-            <div class="carousel-card-genre">Science Fiction</div>
-            <div class="carousel-card-genre">Poetry</div>
-            <div class="carousel-card-genre">Comics</div>
-            <div class="carousel-card-genre">Young Adult</div>
+        <!-- Carousel for cards -->
+        <div id="genre-carousel" class="carousel">
+            <div class="carousel-cards">
+                <div class="carousel-card-genre">Romance</div>
+                <div class="carousel-card-genre">Dark Romance</div>
+                <div class="carousel-card-genre">Mystery</div>
+                <div class="carousel-card-genre">Thriller</div>
+                <div class="carousel-card-genre">Horror</div>
+                <div class="carousel-card-genre">Fantasy</div>
+                <div class="carousel-card-genre">Science Fiction</div>
+                <div class="carousel-card-genre">Poetry</div>
+                <div class="carousel-card-genre">Comics</div>
+                <div class="carousel-card-genre">Young Adult</div>
+            </div>
+            <!-- Navigation Buttons -->
+            <button class="prev" onclick="prevCarousel()">&#10094;</button>
+            <button class="next" onclick="nextCarousel()">&#10095;</button>
         </div>
-        <!-- Navigation Buttons -->
-        <button class="prev" onclick="prevCarousel()">&#10094;</button>
-        <button class="next" onclick="nextCarousel()">&#10095;</button>
-    </div>
-    <a href="genres.html">
-        <button class="explore-more">Explore More</button>
-    </a>
-</section>
+        <a href="genres.html">
+            <button class="explore-more">Explore More</button>
+        </a>
+    </section>
 
-<!-- Popular Authors Section -->
-<section class="popular-authors">
-    <h2>Popular Authors</h2>
+    <!-- Popular Authors Section -->
+    <section class="popular-authors">
+        <h2>Popular Authors</h2>
 
-    <!-- Cards Grid -->
-    <div class="author-grid">
-        <!-- Card 1 -->
-        <div class="card-author">
-            <a href="anahuang.html">
-                <img src="Images/Ana Huang/anahuang.jpg" alt="Ana Huang">
-            </a>
-            <h1 class="card-author-name">Ana Huang</h1>
+        <!-- Cards Grid -->
+        <div class="author-grid">
+            <!-- Card 1 -->
+            <div class="card-author">
+                <a href="anahuang.html">
+                    <img src="Images/Ana Huang/anahuang.jpg" alt="Ana Huang">
+                </a>
+                <h1 class="card-author-name">Ana Huang</h1>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card-author">
+                <a href="juliaquinn.html">
+                    <img src="Images/Julia Quinn/juliaquinn.jpg" alt="Julia Quinn">
+                </a>
+                <h1 class="card-author-name">Julia Quinn</h1>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card-author">
+                <a href="hdcarlton.html">
+                    <img src="Images/H.D. Carlton/hdcarlton.jpg" alt="H.D. Carlton">
+                </a>
+                <h1 class="card-author-name">H.D. Carlton</h1>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card-author">
+                <a href="penelopedouglas.html">
+                    <img src="Images/Penelope Douglas/penelopedouglas.jpg" alt="Penelope Douglas">
+                </a>
+                <h1 class="card-author-name">Penelope Douglas</h1>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="card-author">
+                <a href="colleenhoover.html">
+                    <img src="Images/Colleen Hoover/colleenhoover.jpg" alt="Colleen Hoover">
+                </a>
+                <h1 class="card-author-name">Colleen Hoover</h1>
+            </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="card-author">
-            <a href="juliaquinn.html">
-                <img src="Images/Julia Quinn/juliaquinn.jpg" alt="Julia Quinn">
-            </a>
-            <h1 class="card-author-name">Julia Quinn</h1>
-        </div>
 
-        <!-- Card 3 -->
-        <div class="card-author">
-            <a href="hdcarlton.html">
-                <img src="Images/H.D. Carlton/hdcarlton.jpg" alt="H.D. Carlton">
-            </a>
-            <h1 class="card-author-name">H.D. Carlton</h1>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="card-author">
-            <a href="penelopedouglas.html">
-                <img src="Images/Penelope Douglas/penelopedouglas.jpg" alt="Penelope Douglas">
-            </a>
-            <h1 class="card-author-name">Penelope Douglas</h1>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="card-author">
-            <a href="colleenhoover.html">
-                <img src="Images/Colleen Hoover/colleenhoover.jpg" alt="Colleen Hoover">
-            </a>
-            <h1 class="card-author-name">Colleen Hoover</h1>
-        </div>
-    </div>
-
-
-    <!-- Explore More Button -->
-    <a href="authors.html">
-        <button class="explore-more">Explore More</button>
-    </a>
-</section>
+        <!-- Explore More Button -->
+        <a href="authors.html">
+            <button class="explore-more">Explore More</button>
+        </a>
+    </section>
 
 
 
