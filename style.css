@@ -275,7 +275,7 @@ button.next {
     border-radius: 10px;
 }
 
-.card-author p {
+.card-author-name h1 {
     color: #000000;
     text-align: center;
     margin-top: 10px; /* Add space between image and text */
