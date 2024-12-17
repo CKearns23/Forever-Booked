@@ -1,9 +1,3 @@
-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
 /* Header Section */
 .logo{
     text-align: center;
@@ -18,10 +12,17 @@ body {
     padding: 15px;
 }
 
-.nav-bar{
+/* Navigation Bar */
+.nav-bar {
     background-color: #D5BDAF;
     padding: 15px;
-    text-align: center;
+    display: flex; /* Use flexbox to align items */
+    justify-content: space-between; /* Space out the nav links and search bar */
+    align-items: center; /* Vertically center the content */
+}
+
+.nav-bar nav {
+    display: flex; /* Flexbox for nav items */
 }
 
 .nav-bar a {
@@ -30,13 +31,18 @@ body {
     padding: 15px;
     font-size: 20px;
 }
-      
+
 .nav-bar a:hover {
     background-color: #c89f9c;
-    color: #000000; 
+    color: #000000;
 }
 
 /* Styling for the search input */
+.search-container {
+    display: flex; /* Ensure label and input are aligned horizontally */
+    align-items: center; /* Vertically center the search bar */
+}
+
 #search {
     padding: 8px 12px; /* Add padding inside the input */
     font-size: 16px; /* Set the font size */
@@ -53,6 +59,7 @@ body {
     background-color: #f8f8f8;
     border: 1px solid #ddd;
 }
+
 
 /* Hero Section Styles */
 .hero-section {
@@ -297,6 +304,10 @@ button.next {
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+}
+
+.card-author p{
+    color:#000000;
 }
 
 .explore-more {
