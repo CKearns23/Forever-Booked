@@ -36,6 +36,24 @@ body {
     color: #000000; 
 }
 
+/* Styling for the search input */
+#search {
+    padding: 8px 12px; /* Add padding inside the input */
+    font-size: 16px; /* Set the font size */
+    border: 1px solid #ccc; /* Light border for the input */
+    border-radius: 4px; /* Rounded corners for the input */
+    margin-left: 10px; /* Space between label and input */
+    width: 200px; /* Set a fixed width for the search input */
+}
+
+/* Optional styling for search results */
+#search-results {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+}
+
 /* Hero Section Styles */
 .hero-section {
     text-align: center;
