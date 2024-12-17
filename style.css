@@ -256,28 +256,30 @@ button.next {
 
 .card-author {
     width: 150px;
-    height: 200px;
     border-radius: 8px;
+    background-color: #fff;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column; /* Stack children vertically */
-    justify-content: center; /* Center items if needed */
     align-items: center; /* Center items horizontally */
+    overflow: hidden;
 }
 
 .card-author img {
     width: 100%;
-    height: 100%;
+    height: 200px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 8px 8px 0 0; /* Round only the top corners */
 }
 
-.card-author-name h1 {
+.card-author-name {
     color: #000000;
     text-align: center;
-    padding: 5px;
+    font-size: 1.1em;
+    margin: 10px 0; /* Add spacing between image and text */
 }
+
 
 .explore-more {
     margin-top: 20px;
