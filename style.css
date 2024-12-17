@@ -257,10 +257,8 @@ button.next {
 .card-author {
     width: 150px;
     height: 200px;
-    border-radius: 10px;
-    background-color: #efe5dc;
+    border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column; /* Stack children vertically */
@@ -278,7 +276,6 @@ button.next {
 .card-author-name h1 {
     color: #000000;
     text-align: center;
-    margin-top: 10px; /* Add space between image and text */
     padding: 5px;
 }
 
