@@ -44,11 +44,14 @@ function vote(bookId) {
 }
 
 function saveVotes() {
+    console.log("Saving votes:", votes);  // Debugging log
     localStorage.setItem('votes', JSON.stringify(votes));
 }
 
 function loadVotes() {
     const savedVotes = JSON.parse(localStorage.getItem('votes'));
+    console.log("Loaded votes:", savedVotes);  // Debugging log
+
     if (savedVotes) {
         Object.assign(votes, savedVotes);
 
@@ -59,6 +62,8 @@ function loadVotes() {
                 voteCountElement.textContent = votes[bookId];
             }
         }
+    } else {
+        console.log("No votes found in localStorage");  // Debugging log
     }
 }
 
@@ -66,6 +71,7 @@ function loadVotes() {
 window.onload = () => {
     loadVotes();
 };
+
 
 // Load the genre carousel when the page loads
 window.onload = () => {
