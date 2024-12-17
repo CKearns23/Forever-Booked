@@ -33,31 +33,32 @@
         <h1>Click on the "Explore" or "Authors" tabs to find a book or review!</h1>
     </div>
 
-    <!-- Popular Genres Section -->
-    <section id="popular-genres" class="popular-genres">
-        <h2>Popular Genres</h2>
+   <!-- Popular Genres Section -->
+<section id="popular-genres" class="popular-genres">
+    <h2>Popular Genres</h2>
 
-        <!-- Carousel for cards -->
-        <div id="genre-carousel" class="carousel">
-            <div class="carousel-cards">
-                <div class="carousel-card-genre">Romance</div>
-                <div class="carousel-card-genre">Dark Romance</div>
-                <div class="carousel-card-genre">Mystery</div>
-                <div class="carousel-card-genre">Thriller</div>
-                <div class="carousel-card-genre">Horror</div>
-                <div class="carousel-card-genre">Fantasy</div>
-                <div class="carousel-card-genre">Science Fiction</div>
-                <div class="carousel-card-genre">Poetry</div>
-                <div class="carousel-card-genre">Comics</div>
-                <div class="carousel-card-genre">Young Adult</div>
-            </div>
-            <button class="prev" onclick="prevCarousel()">&#10094;</button>
-            <button class="next" onclick="nextCarousel()">&#10095;</button>
+    <!-- Carousel for cards -->
+    <div id="genre-carousel" class="carousel">
+        <div class="carousel-cards">
+            <div class="carousel-card-genre">Romance</div>
+            <div class="carousel-card-genre">Dark Romance</div>
+            <div class="carousel-card-genre">Mystery</div>
+            <div class="carousel-card-genre">Thriller</div>
+            <div class="carousel-card-genre">Horror</div>
+            <div class="carousel-card-genre">Fantasy</div>
+            <div class="carousel-card-genre">Science Fiction</div>
+            <div class="carousel-card-genre">Poetry</div>
+            <div class="carousel-card-genre">Comics</div>
+            <div class="carousel-card-genre">Young Adult</div>
         </div>
-        <a href="genres.html">
-            <button class="explore-more">Explore More</button>
-        </a>
-    </section>
+        <!-- Navigation Buttons -->
+        <button class="prev" onclick="prevCarousel()">&#10094;</button>
+        <button class="next" onclick="nextCarousel()">&#10095;</button>
+    </div>
+    <a href="genres.html">
+        <button class="explore-more">Explore More</button>
+    </a>
+</section>
 
 <!-- Popular Authors Section -->
 <section id="popular-authors" class="popular-authors">
@@ -92,8 +93,8 @@
             </div>
         </div>
         <!-- Navigation Buttons -->
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
+        <button class="prev" onclick="prevCarousel()">&#10094;</button>
+        <button class="next" onclick="nextCarousel()">&#10095;</button>
     </div>
     <a href="authors.html">
         <button class="explore-more">Explore More</button>
