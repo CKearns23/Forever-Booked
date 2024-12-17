@@ -44,30 +44,33 @@ function vote(bookId) {
 }
 
 function saveVotes() {
-    console.log("Saving votes:", votes);  // Debugging log
-    localStorage.setItem('votes', JSON.stringify(votes));
-}
-
-function loadVotes() {
-    const savedVotes = JSON.parse(localStorage.getItem('votes'));
-    console.log("Loaded votes:", savedVotes);  // Debugging log
-
-    if (savedVotes) {
-        Object.assign(votes, savedVotes);
-
-        // Update the vote count display for all books
-        for (const bookId in votes) {
-            const voteCountElement = document.getElementById(`${bookId}-votes`);
-            if (voteCountElement) {
-                voteCountElement.textContent = votes[bookId];
-            }
-        }
+    if (typeof(Storage) !== "undefined") {
+        localStorage.setItem('votes', JSON.stringify(votes));
     } else {
-        console.log("No votes found in localStorage");  // Debugging log
+        console.error("localStorage is not available");
     }
 }
 
-// Load saved votes when the page loads
+function loadVotes() {
+    if (typeof(Storage) !== "undefined") {
+        const savedVotes = JSON.parse(localStorage.getItem('votes'));
+        if (savedVotes) {
+            Object.assign(votes, savedVotes);
+
+            // Update the vote count display for all books
+            for (const bookId in votes) {
+                const voteCountElement = document.getElementById(`${bookId}-votes`);
+                if (voteCountElement) {
+                    voteCountElement.textContent = votes[bookId];
+                }
+            }
+        }
+    } else {
+        console.error("localStorage is not available");
+    }
+}
+
+// Load votes when the page loads
 window.onload = () => {
     loadVotes();
 };
