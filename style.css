@@ -238,7 +238,7 @@ button.next {
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Popular Authors Section Styles */
+/* Popular Authors Section */
 .popular-authors {
     background-color: #D5BDAF;
     text-align: center;
@@ -247,7 +247,7 @@ button.next {
 
 .carousel {
     position: relative;
-    width: 80%;  /* Make the carousel container smaller */
+    width: 80%; /* Make the carousel container smaller */
     margin: 0 auto;
     overflow: hidden;
 }
@@ -255,14 +255,12 @@ button.next {
 .carousel-cards {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    width: fit-content;  /* Ensure the cards container width fits all cards */
-    justify-content: center;
-    gap: 20px;  /* Space between cards */
+    gap: 20px; /* Space between cards */
 }
 
 .carousel-card-author {
-    width: 150px;  
-    height: 200px; 
+    width: 150px;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -279,12 +277,39 @@ button.next {
     border-radius: 8px;
 }
 
+/* Navigation Buttons */
+.carousel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+    z-index: 10;
+}
 
-/* Active card highlighting */
-.carousel-card.active {
+.carousel button.prev {
+    left: 10px;
+}
+
+.carousel button.next {
+    right: 10px;
+}
+
+.carousel button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Active card scaling (optional) */
+.carousel-card-author.active {
     transform: scale(1.1);
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
 }
+
 
 
 /* Chatbox Section */

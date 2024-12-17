@@ -69,29 +69,34 @@ window.onload = () => {
     initializeCarousel('#artists-carousel');
 };
 
-// Carousel functionality
-function initializeCarousel(carouselSelector, cardWidth = 150, gap = 20) {
+/function initializeCarousel(carouselSelector, cardWidth = 150, gap = 20) {
     const carousel = document.querySelector(carouselSelector);
     const carouselCards = carousel.querySelector('.carousel-cards');
     const totalCards = carouselCards.children.length;
-    let currentCarouselIndex = 1; // Start at the second card (so the first one is not the clone)
+    let currentCarouselIndex = 1;
 
     // Function to show a specific slide
     function showCarouselSlide(index) {
         const offset = (cardWidth + gap) * index;
 
+        // Remove active class from all cards
+        document.querySelectorAll('.carousel-card-author').forEach((card) => {
+            card.classList.remove('active');
+        });
+
+        // Add active class to the current card
+        carouselCards.children[index].classList.add('active');
+
         carouselCards.style.transition = 'transform 0.5s ease-in-out';
         carouselCards.style.transform = `translateX(-${offset}px)`;
 
-        // Reset the carousel to the first or last card when the transition ends to create the infinite loop effect
+        // Reset the carousel for infinite looping
         carouselCards.addEventListener('transitionend', function handleTransition() {
             if (index === totalCards - 1) {
-                // If last clone, jump to the first real card
                 carouselCards.style.transition = 'none';
                 currentCarouselIndex = 1;
                 carouselCards.style.transform = `translateX(-${(cardWidth + gap) * currentCarouselIndex}px)`;
             } else if (index === 0) {
-                // If first clone, jump to the last real card
                 carouselCards.style.transition = 'none';
                 currentCarouselIndex = totalCards - 2;
                 carouselCards.style.transform = `translateX(-${(cardWidth + gap) * currentCarouselIndex}px)`;
@@ -102,24 +107,24 @@ function initializeCarousel(carouselSelector, cardWidth = 150, gap = 20) {
         currentCarouselIndex = index;
     }
 
-    // Function to move to the next slide
+    // Move to the next slide
     function nextCarousel() {
         if (currentCarouselIndex < totalCards - 1) {
             showCarouselSlide(currentCarouselIndex + 1);
         }
     }
 
-    // Function to move to the previous slide
+    // Move to the previous slide
     function prevCarousel() {
         if (currentCarouselIndex > 0) {
             showCarouselSlide(currentCarouselIndex - 1);
         }
     }
 
-    // Clone the first and last cards for infinite looping
+    // Clone first and last cards for infinite loop
     function createInfiniteLoop() {
-        const firstCard = carouselCards.querySelector('.carousel-card-genre:first-child');
-        const lastCard = carouselCards.querySelector('.carousel-card-genre:last-child');
+        const firstCard = carouselCards.querySelector('.carousel-card-author:first-child');
+        const lastCard = carouselCards.querySelector('.carousel-card-author:last-child');
 
         const firstClone = firstCard.cloneNode(true);
         const lastClone = lastCard.cloneNode(true);
@@ -131,14 +136,19 @@ function initializeCarousel(carouselSelector, cardWidth = 150, gap = 20) {
     // Initialize the carousel
     createInfiniteLoop();
 
-    // Set the initial transform value for proper alignment
     const initialOffset = (cardWidth + gap) * currentCarouselIndex;
     carouselCards.style.transform = `translateX(-${initialOffset}px)`;
 
-    // Event listeners for buttons
+    // Add event listeners for navigation buttons
     carousel.querySelector('.next').addEventListener('click', nextCarousel);
     carousel.querySelector('.prev').addEventListener('click', prevCarousel);
 }
+
+// Run the carousel initialization
+document.addEventListener("DOMContentLoaded", function () {
+    initializeCarousel("#authors-carousel", 150, 20);
+});
+
 
 // Book recommendation chatbot
 let currentStep = 0; // Keeps track of the current step in the conversation
