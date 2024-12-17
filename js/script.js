@@ -212,7 +212,7 @@ function addChatMessage(message) {
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
-// Function to handle search when the button is clicked
+// Listen for the "Search" button click
 document.getElementById('search-btn').addEventListener('click', function() {
     const searchQuery = document.getElementById('search').value.trim().toLowerCase();
 
@@ -226,6 +226,12 @@ document.getElementById('search-btn').addEventListener('click', function() {
         authors: new Set(), // Use Set to avoid duplicates
         genres: new Set() // Use Set to avoid duplicates
     };
+
+    // Check if recommendations object is loaded
+    if (!recommendations || Object.keys(recommendations).length === 0) {
+        console.error("Recommendations data is not loaded.");
+        return;
+    }
 
     // Loop through the genres and their books once data is loaded
     Object.keys(recommendations).forEach(genre => {
@@ -303,6 +309,18 @@ function displaySearchResults(results) {
         resultsContainer.appendChild(noGenresMessage);
     }
 }
+
+// Book data loading (ensure this part loads correctly)
+fetch('books.json')
+    .then(response => response.json())
+    .then(data => {
+        recommendations = data; // Store the books data
+        console.log('Books data loaded:', recommendations); // Debugging
+    })
+    .catch(error => {
+        console.error('Error loading books data:', error);
+    });
+
 
 // This listens for the form submission event
 document.getElementById('review-form').addEventListener('submit', function(event) {
