@@ -261,6 +261,7 @@ document.getElementById('search-btn').addEventListener('click', function() {
 
 // Function to display search results
 function displaySearchResults(results) {
+    console.log('Search Results:', results); // Debugging
     const resultsContainer = document.getElementById('search-results');
     resultsContainer.innerHTML = ''; // Clear previous results
 
@@ -279,20 +280,6 @@ function displaySearchResults(results) {
         resultsContainer.appendChild(noBooksMessage);
     }
 
-    // Display authors
-    if (results.authors.length > 0) {
-        const authorsList = document.createElement('ul');
-        results.authors.forEach(author => {
-            const listItem = document.createElement('li');
-            listItem.textContent = author;
-            authorsList.appendChild(listItem);
-        });
-        resultsContainer.appendChild(authorsList);
-    } else {
-        const noAuthorsMessage = document.createElement('p');
-        noAuthorsMessage.textContent = 'No authors found.';
-        resultsContainer.appendChild(noAuthorsMessage);
-    }
 
     // Display genres
     if (results.genres.length > 0) {
