@@ -3,7 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
   }
-  
+
 /* Header Section */
 .logo{
     text-align: center;
@@ -18,17 +18,10 @@ body {
     padding: 15px;
 }
 
-/* Navigation Bar */
-.nav-bar {
+.nav-bar{
     background-color: #D5BDAF;
     padding: 15px;
-    display: flex; /* Use flexbox to align items */
-    justify-content: space-between; /* Space out the nav links and search bar */
-    align-items: center; /* Vertically center the content */
-}
-
-.nav-bar nav {
-    display: flex; /* Flexbox for nav items */
+    text-align: center;
 }
 
 .nav-bar a {
@@ -37,51 +30,11 @@ body {
     padding: 15px;
     font-size: 20px;
 }
-
+      
 .nav-bar a:hover {
     background-color: #c89f9c;
-    color: #000000;
+    color: #000000; 
 }
-
-/* Styling for the search input and button */
-.search-container {
-    display: flex; /* Ensure label, input, and button are aligned horizontally */
-    align-items: center; /* Vertically center the search bar */
-}
-
-#search {
-    padding: 8px 12px; /* Add padding inside the input */
-    font-size: 16px; /* Set the font size */
-    border: 1px solid #ccc; /* Light border for the input */
-    border-radius: 4px; /* Rounded corners for the input */
-    margin-left: 10px; /* Space between label and input */
-    width: 200px; /* Set a fixed width for the search input */
-}
-
-/* Styling for the search button */
-#search-btn {
-    padding: 8px 12px; /* Add padding inside the button */
-    font-size: 16px; /* Set the font size */
-    background-color: #c89f9c; /* Background color of the button */
-    border: 1px solid #ccc; /* Light border for the button */
-    border-radius: 4px; /* Rounded corners for the button */
-    color: black; /* Text color */
-    cursor: pointer; /* Change the cursor to pointer on hover */
-    margin-left: 10px; /* Space between the input and button */
-}
-
-#search-btn:hover {
-    background-color: #D5BDAF; /* Change background on hover */
-}
-
-/* Optional styling for search results */
-#search-results {
-    padding: 20px;
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-}
-
-
 
 /* Hero Section Styles */
 .hero-section {
@@ -329,9 +282,9 @@ button.next {
 }
 
 .card-author p{
-    color:#000000;
+    color: #000000;
+    text-align: center;
 }
-
 .explore-more {
     margin-top: 20px;
     padding: 10px 20px;
