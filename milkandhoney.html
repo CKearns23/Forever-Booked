@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">Forever Booked</a>
+        </div>
+        <div class="nav-bar">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="explore.html">Explore</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="book-profile">
+        <div class="book-details">
+            <img src="Images/Rupi Kaur/milkandhoney.jpg">
+            <div class="book-bio">
+                <h1>Milk and Honey by Rupi Kaur</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-container">
+        <div id="reviews-container">
+            <h2>What Readers Are Saying</h2>
+            <ul id="reviews-list" class="scrolling-reviews"></ul>
+        </div>
+    </section>
+
+    <section class="book-review">
+        <div id="book-review">
+            <h2>Submit Your Book Review</h2>
+            <form name="book-review-form" method="POST" data-netlify="true" id="review-form" action="success.html">
+                <label for="book-title">Book Title:</label>
+                <input type="text" id="book-title" name="book-title" required>
+
+                <label for="author-name">Author:</label>
+                <input type="text" id="author-name" name="author-name" required>
+
+                <label for="review">Your Review:</label>
+                <textarea id="review" name="review" rows="5" required></textarea>
+
+                <label for="rating">Rating (1-5):</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" required>
+
+                <button type="submit" id="submit-btn">Submit Review</button>
+            </form>
+
+            <div id="thank-you-message" style="display: none;">
+                <p>Thank you for your review!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-nav bg-light py-4">
+        <nav>
+            <ul class="nav justify-content-center mb-3 flex-column flex-sm-row">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="termsandservices.html">Terms and Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="privacypolicy.html">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright text-center mb-0">Forever Booked © 2024</p>
+        </nav>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
