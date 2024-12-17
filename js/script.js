@@ -62,19 +62,17 @@ function loadVotes() {
     }
 }
 
-// Load votes when the page loads
+// Load the genre carousel when the page loads
 window.onload = () => {
-    loadVotes();
-    initializeCarousel('#genre-carousel');
-    initializeCarousel('#artists-carousel');
+    initializeGenreCarousel('#genre-carousel');
 };
 
-// Carousel functionality
-function initializeCarousel(carouselSelector, cardWidth = 150, gap = 20) {
+// Genre Carousel Functionality
+function initializeGenreCarousel(carouselSelector, cardWidth = 150, gap = 20) {
     const carousel = document.querySelector(carouselSelector);
     const carouselCards = carousel.querySelector('.carousel-cards');
     const totalCards = carouselCards.children.length;
-    let currentCarouselIndex = 1; // Start at the second card (so the first one is not the clone)
+    let currentCarouselIndex = 1; // Start at the second card (for infinite loop effect)
 
     // Function to show a specific slide
     function showCarouselSlide(index) {
@@ -83,15 +81,15 @@ function initializeCarousel(carouselSelector, cardWidth = 150, gap = 20) {
         carouselCards.style.transition = 'transform 0.5s ease-in-out';
         carouselCards.style.transform = `translateX(-${offset}px)`;
 
-        // Reset the carousel to the first or last card when the transition ends to create the infinite loop effect
+        // Handle looping transitions
         carouselCards.addEventListener('transitionend', function handleTransition() {
             if (index === totalCards - 1) {
-                // If last clone, jump to the first real card
+                // Last clone: jump to first real card
                 carouselCards.style.transition = 'none';
                 currentCarouselIndex = 1;
                 carouselCards.style.transform = `translateX(-${(cardWidth + gap) * currentCarouselIndex}px)`;
             } else if (index === 0) {
-                // If first clone, jump to the last real card
+                // First clone: jump to last real card
                 carouselCards.style.transition = 'none';
                 currentCarouselIndex = totalCards - 2;
                 carouselCards.style.transform = `translateX(-${(cardWidth + gap) * currentCarouselIndex}px)`;
@@ -102,14 +100,14 @@ function initializeCarousel(carouselSelector, cardWidth = 150, gap = 20) {
         currentCarouselIndex = index;
     }
 
-    // Function to move to the next slide
+    // Move to the next slide
     function nextCarousel() {
         if (currentCarouselIndex < totalCards - 1) {
             showCarouselSlide(currentCarouselIndex + 1);
         }
     }
 
-    // Function to move to the previous slide
+    // Move to the previous slide
     function prevCarousel() {
         if (currentCarouselIndex > 0) {
             showCarouselSlide(currentCarouselIndex - 1);
@@ -131,11 +129,11 @@ function initializeCarousel(carouselSelector, cardWidth = 150, gap = 20) {
     // Initialize the carousel
     createInfiniteLoop();
 
-    // Set the initial transform value for proper alignment
+    // Set the initial transform value for alignment
     const initialOffset = (cardWidth + gap) * currentCarouselIndex;
     carouselCards.style.transform = `translateX(-${initialOffset}px)`;
 
-    // Event listeners for buttons
+    // Event listeners for navigation buttons
     carousel.querySelector('.next').addEventListener('click', nextCarousel);
     carousel.querySelector('.prev').addEventListener('click', prevCarousel);
 }
