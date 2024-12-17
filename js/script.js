@@ -62,6 +62,11 @@ function loadVotes() {
     }
 }
 
+// Load saved votes when the page loads
+window.onload = () => {
+    loadVotes();
+};
+
 // Load the genre carousel when the page loads
 window.onload = () => {
     initializeGenreCarousel('#genre-carousel');
