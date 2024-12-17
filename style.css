@@ -284,8 +284,8 @@ button.next {
 .explore-more {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #8C6A5D;
-    color: #fff;
+    background-color: #C89F9C;
+    color: #000000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -294,7 +294,7 @@ button.next {
 }
 
 .explore-more:hover {
-    background-color: #6A4F3D;
+    background-color: #D5BDAF;
 }
 
 
