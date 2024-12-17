@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
 /* Header Section */
 .logo{
     text-align: center;
@@ -37,9 +43,9 @@
     color: #000000;
 }
 
-/* Styling for the search input */
+/* Styling for the search input and button */
 .search-container {
-    display: flex; /* Ensure label and input are aligned horizontally */
+    display: flex; /* Ensure label, input, and button are aligned horizontally */
     align-items: center; /* Vertically center the search bar */
 }
 
@@ -52,6 +58,22 @@
     width: 200px; /* Set a fixed width for the search input */
 }
 
+/* Styling for the search button */
+#search-btn {
+    padding: 8px 12px; /* Add padding inside the button */
+    font-size: 16px; /* Set the font size */
+    background-color: #c89f9c; /* Background color of the button */
+    border: 1px solid #ccc; /* Light border for the button */
+    border-radius: 4px; /* Rounded corners for the button */
+    color: black; /* Text color */
+    cursor: pointer; /* Change the cursor to pointer on hover */
+    margin-left: 10px; /* Space between the input and button */
+}
+
+#search-btn:hover {
+    background-color: #D5BDAF; /* Change background on hover */
+}
+
 /* Optional styling for search results */
 #search-results {
     margin-top: 20px;
@@ -59,6 +81,7 @@
     background-color: #f8f8f8;
     border: 1px solid #ddd;
 }
+
 
 
 /* Hero Section Styles */

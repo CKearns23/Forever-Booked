@@ -212,9 +212,9 @@ function addChatMessage(message) {
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
-// Function to handle search
-document.getElementById('search').addEventListener('input', function() {
-    const searchQuery = this.value.toLowerCase();
+// Function to handle search when the button is clicked
+document.getElementById('search-btn').addEventListener('click', function() {
+    const searchQuery = document.getElementById('search').value.trim().toLowerCase();
 
     if (!searchQuery) {
         displaySearchResults({ books: [], authors: [], genres: [] });
