@@ -276,6 +276,7 @@ function loadReviews() {
             <p>${review.userReview}</p>
         `;
         document.getElementById('reviews-list').appendChild(reviewElement);
+    });
 }
 
 // Load reviews when the page loads
