@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Forever Booked</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<header>
+    <div class="logo">
+        <a href="index.html">Forever Booked</a>
+    </div>
+    <div class="nav-bar">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="explore.html">Explore</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container my-5">
+    <h1 class="text-center mb-4">Get in Touch</h1>
+    <form class="contact-form" id="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <!-- Hidden field for Netlify bot prevention -->
+        <input type="hidden" name="form-name" value="contactForm">
+        <div hidden>
+            <label>Don’t fill this out: <input name="bot-field"></label>
+        </div>
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Your Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+</main>
+
+<footer class="footer-nav bg-light py-4">
+    <nav>
+        <ul class="nav justify-content-center mb-3 flex-column flex-sm-row">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <p class="copyright text-center mb-0">Forever Booked © 2024</p>
+    </nav>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+
+</html>

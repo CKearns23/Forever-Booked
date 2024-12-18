@@ -923,4 +923,28 @@ button:hover {
     border-radius: 4px;
   }
   
+
+  .contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #efe5dc;
+}
+
+.contact-form .form-label {
+    font-weight: bold;
+}
+
+.contact-form .btn {
+    width: 100%;
+    background-color: #C89F9C;
+    color: #000000;
+}
+
+.contact-form .btn:hover {
+    background-color: #d5bdaf;
+}
+
   

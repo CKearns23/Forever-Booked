@@ -226,3 +226,18 @@ document.getElementById('review-form').addEventListener('submit', function(event
     // Clear the input field after submission
     document.getElementById('user-review').value = '';
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm');
+
+    form.addEventListener('submit', function (event) {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        if (!name || !email || !message) {
+            alert('Please fill out all fields.');
+            event.preventDefault();
+        }
+    });
+});
