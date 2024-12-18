@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.slider .slides img');
     const totalSlides = slides.length;
 
+    // Function to show the current slide
     function showSlide(index) {
         if (index >= totalSlides) {
             currentSlide = 0;
@@ -12,12 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             currentSlide = index;
         }
+        // Hide all slides
         for (let i = 0; i < totalSlides; i++) {
             slides[i].style.display = 'none';
         }
+        // Show the current slide
         slides[currentSlide].style.display = 'block';
     }
 
+    // Next and previous slide navigation
     function nextSlide() {
         showSlide(currentSlide + 1);
     }
@@ -28,17 +32,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     showSlide(currentSlide); // Initialize the slider
 
+    // Attach event listeners to navigation buttons
     document.querySelector('.next').addEventListener('click', nextSlide);
     document.querySelector('.prev').addEventListener('click', prevSlide);
 
     // Initialize genre carousel
     initializeGenreCarousel('#genre-carousel');
 
+    // Function to set up the genre carousel
     function initializeGenreCarousel(selector) {
         const carousel = document.querySelector(selector);
         const slides = carousel.querySelectorAll('.carousel-slide');
         let currentIndex = 0;
 
+        // Function to move the carousel based on direction (forward or backward)
         function moveCarousel(direction) {
             currentIndex += direction;
             if (currentIndex < 0) {
@@ -49,11 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
             updateCarousel();
         }
 
+        // Function to update the carousel position
         function updateCarousel() {
             const offset = -currentIndex * 100; // Assuming each slide is 100% width
             carousel.style.transform = `translateX(${offset}%)`;
         }
 
+        // Attach event listeners to carousel navigation buttons
         const nextButton = document.querySelector('.next');
         const prevButton = document.querySelector('.prev');
         nextButton.addEventListener('click', () => moveCarousel(1));
@@ -71,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Handle the voting logic
     function vote(bookId) {
         const votes = JSON.parse(localStorage.getItem('votes')) || {};
         votes[bookId] = (votes[bookId] || 0) + 1;
@@ -78,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateVoteCount(bookId, votes[bookId]);
     }
 
+    // Update the displayed vote count
     function updateVoteCount(bookId, count) {
         const voteCountElement = document.querySelector(`.vote-count[data-book-id="${bookId}"]`);
         if (voteCountElement) {
@@ -85,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Load votes on page load
+    // Load saved votes from localStorage on page load
     function loadVotes() {
         const votes = JSON.parse(localStorage.getItem('votes')) || {};
         for (let bookId in votes) {
@@ -100,26 +111,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatBox = document.querySelector('#chat-box');
     const submitButton = document.querySelector('#submit-btn');
 
+    // Event listener for chatbox submission
     submitButton.addEventListener('click', function() {
         const userMessage = chatInput.value;
         if (userMessage) {
             addChatMessage('user', userMessage);
-            chatInput.value = '';
-            getRecommendation(userMessage);
+            chatInput.value = ''; // Clear the input field
+            getRecommendation(userMessage); // Get a book recommendation based on user input
         }
     });
 
+    // Function to add a message to the chatbox
     function addChatMessage(sender, message) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('chat-message', sender);
         messageElement.textContent = message;
         chatBox.appendChild(messageElement);
-        chatBox.scrollTop = chatBox.scrollHeight;
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom of the chat
     }
 
+    // Function to get book recommendations based on user input
     function getRecommendation(userMessage) {
         const genre = userMessage.toLowerCase();
-        fetch('books.json')
+        fetch('books.json') // Fetch the JSON data from the books.json file
             .then(response => response.json())
             .then(data => {
                 if (data[genre]) {
