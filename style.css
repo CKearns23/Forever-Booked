@@ -923,61 +923,71 @@ button:hover {
     border-radius: 4px;
   }
   
-/* Form container */
-.contact-form {
-    max-width: 600px;
-    padding: 20px;
-    border: 2px solid #d5bdaf; 
-    border-radius: 8px;
-    background-color: #efe5dc; 
+/* Contact Form*/
+.contact-form-section {
+    background-color: #efe5dc;
+    padding: 40px;
     text-align: center;
-
-}
-
-/* Form heading */
-.contact-form h1 {
-    font-size: 15px;
-    text-align: center;
-    color: #c89f9c; 
-    margin-bottom: 15px;
-}
-
-/* Labels */
-.contact-form .form-label {
-    font-weight: bold;
-    color: #000000; 
-    margin-bottom: 5px;
+  }
+  
+  .contact-form-section h2 {
+    font-size: 35px;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+  
+  .contact-form-section h3 {
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  label {
+    font-size: 18px;
+    color: #000000;
     display: block;
-}
-
-/* Input fields */
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"], input[type="email"], textarea {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #d5bdaf; 
-    border-radius: 5px;
-    font-size: 1rem;
-    background-color: #efe5dc; 
-    color: #000000;
-}
-
-/* Submit button */
-.contact-form .btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #000000; 
-    background-color: #c89f9c; /* Soft rose background */
+    font-size: 16px;
+    border: 2px solid #d5bdaf;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    border-color: #efe5dc;
+    outline: none;
+  }
+  
+  textarea {
+    resize: vertical;
+  }
+  
+  .submit-btn {
+    background-color: #C89F9C;
+    color: #efe5dc;
+    padding: 12px 25px;
+    font-size: 18px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-}
-
-/* Button hover effect */
-.contact-form .btn:hover {
-    background-color: #d5bdaf; 
-}
+    text-transform: uppercase;
+  }
+  
+  .submit-btn:hover {
+    background-color: #d5bdaf;
+    color: #000000;
+    border: 2px solid #c89f9c;
+    transition: background-color 0.3s, color 0.3s;
+  }
