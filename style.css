@@ -926,25 +926,26 @@ button:hover {
 /* Form container */
 .contact-form {
     max-width: 600px;
-    margin: 20px auto;
     padding: 20px;
-    border: 2px solid #d5bdaf; /* Muted beige border */
+    border: 2px solid #d5bdaf; 
     border-radius: 8px;
-    background-color: #efe5dc; /* Light cream background */
+    background-color: #efe5dc; 
+    text-align: center;
+
 }
 
 /* Form heading */
 .contact-form h1 {
-    font-size: 1.8rem;
+    font-size: 15px;
     text-align: center;
-    color: #c89f9c; /* Soft rose for the heading */
+    color: #c89f9c; 
     margin-bottom: 15px;
 }
 
 /* Labels */
 .contact-form .form-label {
     font-weight: bold;
-    color: #c89f9c; /* Matches heading */
+    color: #000000; 
     margin-bottom: 5px;
     display: block;
 }
@@ -956,11 +957,11 @@ button:hover {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #d5bdaf; /* Muted beige for border */
+    border: 1px solid #d5bdaf; 
     border-radius: 5px;
     font-size: 1rem;
-    background-color: #ffffff; /* White for contrast */
-    color: #333; /* Dark text */
+    background-color: #efe5dc; 
+    color: #000000;
 }
 
 /* Submit button */
@@ -969,7 +970,7 @@ button:hover {
     padding: 12px;
     font-size: 1rem;
     font-weight: bold;
-    color: #ffffff; /* White text */
+    color: #000000; 
     background-color: #c89f9c; /* Soft rose background */
     border: none;
     border-radius: 5px;
@@ -978,5 +979,5 @@ button:hover {
 
 /* Button hover effect */
 .contact-form .btn:hover {
-    background-color: #d5bdaf; /* Muted beige */
+    background-color: #d5bdaf; 
 }
