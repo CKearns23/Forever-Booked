@@ -212,19 +212,39 @@ function addChatMessage(message) {
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
-// This listens for the form submission event
+// Handle form submission for book reviews
 document.getElementById('review-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevents form from submitting the traditional way
 
+    const bookTitle = document.getElementById('book-title').value; // Get the book title
+    const authorName = document.getElementById('author-name').value; // Get the author's name
     const userReview = document.getElementById('user-review').value; // Get the user's review
-    const newReview = document.createElement('p'); // Creates a new paragraph element
-    newReview.textContent = userReview; // Sets the text of the new review to what the user typed
+    const rating = document.getElementById('rating').value; // Get the rating
 
-    // Append the new review to the reviews section
-    document.getElementById('reviews-section').appendChild(newReview);
+    // Create a new review element with the details
+    const newReview = document.createElement('li'); // Use <li> for the list of reviews
+    newReview.innerHTML = `
+        <strong>${bookTitle} by ${authorName}</strong> <br>
+        Rating: ${rating} <br>
+        <p>${userReview}</p>
+    `;
 
-    // Clear the input field after submission
+    // Append the new review to the reviews list
+    document.getElementById('reviews-list').appendChild(newReview);
+
+    // Clear the input fields after submission
+    document.getElementById('book-title').value = '';
+    document.getElementById('author-name').value = '';
     document.getElementById('user-review').value = '';
+    document.getElementById('rating').value = '';
+
+    // Show thank you message
+    document.getElementById('thank-you-message').style.display = 'block';
+
+    // Hide the thank you message after a few seconds
+    setTimeout(() => {
+        document.getElementById('thank-you-message').style.display = 'none';
+    }, 3000);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
