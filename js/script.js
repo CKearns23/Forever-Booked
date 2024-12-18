@@ -1,261 +1,136 @@
-let slideIndex = 0;
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize slider
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slider .slides img');
+    const totalSlides = slides.length;
 
-// Show slide based on index
-function showSlide(index) {
-    const slides = document.querySelectorAll('.slides img');
-    if (index >= slides.length) slideIndex = 0;
-    if (index < 0) slideIndex = slides.length - 1;
-    slides.forEach((slide, i) => {
-        slide.style.display = i === slideIndex ? 'block' : 'none';
-    });
-}
-
-// Next slide function
-function nextSlide() {
-    slideIndex++;
-    showSlide(slideIndex);
-}
-
-// Previous slide function
-function prevSlide() {
-    slideIndex--;
-    showSlide(slideIndex);
-}
-
-// Initialize the first slide
-showSlide(slideIndex);
-
-// Voting functionality
-const votes = {
-    book1: 0,
-    book2: 0,
-    book3: 0,
-};
-
-// Increment vote count and update display
-function vote(bookId) {
-    votes[bookId] += 1;
-
-    const voteCountElement = document.getElementById(`${bookId}-votes`);
-    if (voteCountElement) {
-        voteCountElement.textContent = votes[bookId];
-    }
-
-    saveVotes();
-}
-
-// Save votes to localStorage
-function saveVotes() {
-    if (typeof(Storage) !== "undefined") {
-        localStorage.setItem('votes', JSON.stringify(votes));  // Save votes to localStorage
-    } else {
-        console.error("localStorage is not available");
-    }
-}
-
-// Load votes from localStorage
-function loadVotes() {
-    if (typeof(Storage) !== "undefined") {
-        const savedVotes = JSON.parse(localStorage.getItem('votes'));
-        if (savedVotes) {
-            Object.assign(votes, savedVotes);
-
-            // Update the displayed vote counts
-            for (const bookId in votes) {
-                const voteCountElement = document.getElementById(`${bookId}-votes`);
-                if (voteCountElement) {
-                    voteCountElement.textContent = votes[bookId];
-                }
-            }
-        }
-    } else {
-        console.error("localStorage is not available");
-    }
-}
-
-// Ensure that the vote buttons are correctly hooked up
-document.querySelectorAll('.vote-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        const bookId = button.getAttribute('data-book-id');
-        vote(bookId);
-    });
-});
-
-// Genre Carousel Functionality
-function initializeGenreCarousel(carouselSelector, cardWidth = 150, gap = 20) {
-    const carousel = document.querySelector(carouselSelector);
-    const carouselCards = carousel.querySelector('.carousel-cards');
-    const totalCards = carouselCards.children.length;
-    let currentCarouselIndex = 1;
-
-    function showCarouselSlide(index) {
-        const offset = (cardWidth + gap) * index;
-        carouselCards.style.transition = 'transform 0.5s ease-in-out';
-        carouselCards.style.transform = `translateX(-${offset}px)`;
-
-        carouselCards.addEventListener('transitionend', function handleTransition() {
-            if (index === totalCards - 1) {
-                carouselCards.style.transition = 'none';
-                currentCarouselIndex = 1;
-                carouselCards.style.transform = `translateX(-${(cardWidth + gap) * currentCarouselIndex}px)`;
-            } else if (index === 0) {
-                carouselCards.style.transition = 'none';
-                currentCarouselIndex = totalCards - 2;
-                carouselCards.style.transform = `translateX(-${(cardWidth + gap) * currentCarouselIndex}px)`;
-            }
-            carouselCards.removeEventListener('transitionend', handleTransition);
-        });
-
-        currentCarouselIndex = index;
-    }
-
-    function nextCarousel() {
-        if (currentCarouselIndex < totalCards - 1) {
-            showCarouselSlide(currentCarouselIndex + 1);
-        }
-    }
-
-    function prevCarousel() {
-        if (currentCarouselIndex > 0) {
-            showCarouselSlide(currentCarouselIndex - 1);
-        }
-    }
-
-    function createInfiniteLoop() {
-        const firstCard = carouselCards.querySelector('.carousel-card-genre:first-child');
-        const lastCard = carouselCards.querySelector('.carousel-card-genre:last-child');
-
-        const firstClone = firstCard.cloneNode(true);
-        const lastClone = lastCard.cloneNode(true);
-
-        carouselCards.appendChild(firstClone);
-        carouselCards.insertBefore(lastClone, carouselCards.firstChild);
-    }
-
-    createInfiniteLoop();
-
-    const initialOffset = (cardWidth + gap) * currentCarouselIndex;
-    carouselCards.style.transform = `translateX(-${initialOffset}px)`;
-
-    // Ensure the 'next' and 'prev' buttons are hooked up
-    carousel.querySelector('.next').addEventListener('click', nextCarousel);
-    carousel.querySelector('.prev').addEventListener('click', prevCarousel);
-}
-
-// Book recommendation chatbot
-let currentStep = 0;
-let recommendations = {}; 
-
-fetch('books.json')
-    .then(response => response.json())
-    .then(data => {
-        recommendations = data;
-        console.log('Books data loaded:', recommendations);
-    })
-    .catch(error => {
-        console.error('Error loading books data:', error);
-    });
-
-function getRecommendation() {
-    const userInput = document.getElementById("user-input").value.trim().toLowerCase();
-
-    if (userInput === "") {
-        alert("Please enter something!");
-        return;
-    }
-
-    addChatMessage(`You: ${userInput}`);
-    addChatMessage("Bot: Please wait while I find a book recommendation for you...");
-
-    setTimeout(function () {
-        let botResponse = "";
-
-        const genre = Object.keys(recommendations).find(genre => genre.toLowerCase() === userInput);
-
-        if (genre) {
-            const books = recommendations[genre];
-            const randomBook = books[Math.floor(Math.random() * books.length)];
-            botResponse = `I recommend you read "${randomBook}". Enjoy!`;
+    function showSlide(index) {
+        if (index >= totalSlides) {
+            currentSlide = 0;
+        } else if (index < 0) {
+            currentSlide = totalSlides - 1;
         } else {
-            botResponse = "Sorry, I don't recognize that genre. Please choose from Fantasy, Romance, Mystery, Science Fiction, or Horror.";
+            currentSlide = index;
+        }
+        for (let i = 0; i < totalSlides; i++) {
+            slides[i].style.display = 'none';
+        }
+        slides[currentSlide].style.display = 'block';
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+    showSlide(currentSlide); // Initialize the slider
+
+    document.querySelector('.next').addEventListener('click', nextSlide);
+    document.querySelector('.prev').addEventListener('click', prevSlide);
+
+    // Initialize genre carousel
+    initializeGenreCarousel('#genre-carousel');
+
+    function initializeGenreCarousel(selector) {
+        const carousel = document.querySelector(selector);
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        let currentIndex = 0;
+
+        function moveCarousel(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = slides.length - 1;
+            } else if (currentIndex >= slides.length) {
+                currentIndex = 0;
+            }
+            updateCarousel();
         }
 
-        addChatMessage(`Bot: ${botResponse}`);
-        document.getElementById("user-input").value = "";
-    }, 500);
-}
+        function updateCarousel() {
+            const offset = -currentIndex * 100; // Assuming each slide is 100% width
+            carousel.style.transform = `translateX(${offset}%)`;
+        }
 
-function addChatMessage(message) {
-    const chatbox = document.getElementById("chatbox");
-    const newMessage = document.createElement("p");
-    newMessage.textContent = message;
-    chatbox.appendChild(newMessage);
-    chatbox.scrollTop = chatbox.scrollHeight;
-}
+        const nextButton = document.querySelector('.next');
+        const prevButton = document.querySelector('.prev');
+        nextButton.addEventListener('click', () => moveCarousel(1));
+        prevButton.addEventListener('click', () => moveCarousel(-1));
 
-// Handle form submission for book reviews
-document.getElementById('review-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+        updateCarousel(); // Initialize the carousel
+    }
 
-    const bookTitle = document.getElementById('book-title').value;
-    const authorName = document.getElementById('author-name').value;
-    const userReview = document.getElementById('user-review').value;
-    const rating = document.getElementById('rating').value;
-
-    const newReview = {
-        bookTitle,
-        authorName,
-        userReview,
-        rating
-    };
-
-    saveReview(newReview);
-
-    const newReviewElement = document.createElement('li');
-    newReviewElement.innerHTML = `
-        <strong>${bookTitle} by ${authorName}</strong> <br>
-        Rating: ${rating} <br>
-        <p>${userReview}</p>
-    `;
-
-    document.getElementById('reviews-list').appendChild(newReviewElement);
-
-    document.getElementById('book-title').value = '';
-    document.getElementById('author-name').value = '';
-    document.getElementById('user-review').value = '';
-    document.getElementById('rating').value = '';
-
-    document.getElementById('thank-you-message').style.display = 'block';
-
-    setTimeout(() => {
-        document.getElementById('thank-you-message').style.display = 'none';
-    }, 3000);
-});
-
-// Save review to localStorage
-function saveReview(review) {
-    let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
-    reviews.push(review);
-    localStorage.setItem('reviews', JSON.stringify(reviews));
-}
-
-// Load reviews from localStorage
-function loadReviews() {
-    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
-    reviews.forEach(review => {
-        const reviewElement = document.createElement('li');
-        reviewElement.innerHTML = `
-            <strong>${review.bookTitle} by ${review.authorName}</strong> <br>
-            Rating: ${review.rating} <br>
-            <p>${review.userReview}</p>
-        `;
-        document.getElementById('reviews-list').appendChild(reviewElement);
+    // Voting functionality
+    const voteButtons = document.querySelectorAll('.vote-btn');
+    voteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const bookId = this.dataset.bookId; // Get the book ID from the data attribute
+            vote(bookId);
+        });
     });
-}
 
-// Load reviews and votes when the page loads
-window.onload = () => {
-    loadReviews(); // Load reviews from localStorage
-    loadVotes(); // Load voting data
-    initializeGenreCarousel('#genre-carousel'); // Initialize genre carousel
-};
+    function vote(bookId) {
+        const votes = JSON.parse(localStorage.getItem('votes')) || {};
+        votes[bookId] = (votes[bookId] || 0) + 1;
+        localStorage.setItem('votes', JSON.stringify(votes));
+        updateVoteCount(bookId, votes[bookId]);
+    }
+
+    function updateVoteCount(bookId, count) {
+        const voteCountElement = document.querySelector(`.vote-count[data-book-id="${bookId}"]`);
+        if (voteCountElement) {
+            voteCountElement.textContent = count;
+        }
+    }
+
+    // Load votes on page load
+    function loadVotes() {
+        const votes = JSON.parse(localStorage.getItem('votes')) || {};
+        for (let bookId in votes) {
+            updateVoteCount(bookId, votes[bookId]);
+        }
+    }
+
+    loadVotes(); // Call to load votes when the page loads
+
+    // Chatbox functionality
+    const chatInput = document.querySelector('#chat-input');
+    const chatBox = document.querySelector('#chat-box');
+    const submitButton = document.querySelector('#submit-btn');
+
+    submitButton.addEventListener('click', function() {
+        const userMessage = chatInput.value;
+        if (userMessage) {
+            addChatMessage('user', userMessage);
+            chatInput.value = '';
+            getRecommendation(userMessage);
+        }
+    });
+
+    function addChatMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message', sender);
+        messageElement.textContent = message;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function getRecommendation(userMessage) {
+        const genre = userMessage.toLowerCase();
+        fetch('books.json')
+            .then(response => response.json())
+            .then(data => {
+                if (data[genre]) {
+                    const recommendation = data[genre].join(', ');
+                    addChatMessage('bot', `I recommend these ${genre} books: ${recommendation}`);
+                } else {
+                    addChatMessage('bot', `Sorry, I don't know any books for the genre "${genre}".`);
+                }
+            })
+            .catch(error => {
+                addChatMessage('bot', 'Sorry, there was an error fetching recommendations.');
+            });
+    }
+});
