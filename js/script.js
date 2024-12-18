@@ -221,16 +221,27 @@ document.getElementById('review-form').addEventListener('submit', function(event
     const userReview = document.getElementById('user-review').value; // Get the user's review
     const rating = document.getElementById('rating').value; // Get the rating
 
+    // Create a new review object
+    const newReview = {
+        bookTitle,
+        authorName,
+        userReview,
+        rating
+    };
+
+    // Save the new review to localStorage
+    saveReview(newReview);
+
     // Create a new review element with the details
-    const newReview = document.createElement('li'); // Use <li> for the list of reviews
-    newReview.innerHTML = `
+    const newReviewElement = document.createElement('li'); // Use <li> for the list of reviews
+    newReviewElement.innerHTML = `
         <strong>${bookTitle} by ${authorName}</strong> <br>
         Rating: ${rating} <br>
         <p>${userReview}</p>
     `;
 
     // Append the new review to the reviews list
-    document.getElementById('reviews-list').appendChild(newReview);
+    document.getElementById('reviews-list').appendChild(newReviewElement);
 
     // Clear the input fields after submission
     document.getElementById('book-title').value = '';
@@ -247,17 +258,27 @@ document.getElementById('review-form').addEventListener('submit', function(event
     }, 3000);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('contactForm');
+// Save reviews to localStorage
+function saveReview(review) {
+    let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    reviews.push(review);
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+}
 
-    form.addEventListener('submit', function (event) {
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
+// Load reviews from localStorage
+function loadReviews() {
+    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    reviews.forEach(review => {
+        const reviewElement = document.createElement('li');
+        reviewElement.innerHTML = `
+            <strong>${review.bookTitle} by ${review.authorName}</strong> <br>
+            Rating: ${review.rating} <br>
+            <p>${review.userReview}</p>
+        `;
+        document.getElementById('reviews-list').appendChild(reviewElement);
+}
 
-        if (!name || !email || !message) {
-            alert('Please fill out all fields.');
-            event.preventDefault();
-        }
-    });
-});
+// Load reviews when the page loads
+window.onload = () => {
+    loadReviews(); // Load reviews from localStorage
+};
