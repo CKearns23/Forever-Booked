@@ -183,6 +183,24 @@ function addChatMessage(message) {
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getDatabase, ref, push, get, child } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
 // Handle form submission for book reviews
 document.getElementById('review-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -199,53 +217,55 @@ document.getElementById('review-form').addEventListener('submit', function(event
         rating
     };
 
+    // Save review to Firebase
     saveReview(newReview);
 
-    const newReviewElement = document.createElement('li');
-    newReviewElement.innerHTML = `
-        <strong>${bookTitle} by ${authorName}</strong> <br>
-        Rating: ${rating} <br>
-        <p>${userReview}</p>
-    `;
-
-    document.getElementById('reviews-list').appendChild(newReviewElement);
-
+    // Clear form fields
     document.getElementById('book-title').value = '';
     document.getElementById('author-name').value = '';
     document.getElementById('user-review').value = '';
     document.getElementById('rating').value = '';
 
+    // Show thank you message
     document.getElementById('thank-you-message').style.display = 'block';
-
     setTimeout(() => {
         document.getElementById('thank-you-message').style.display = 'none';
     }, 3000);
 });
 
-// Save review to localStorage
+// Save review to Firebase
 function saveReview(review) {
-    let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
-    reviews.push(review);
-    localStorage.setItem('reviews', JSON.stringify(reviews));
+    const reviewsRef = ref(db, 'reviews');
+    push(reviewsRef, review); // Pushes a new review to the database
 }
 
-// Load reviews from localStorage
+// Load reviews from Firebase
 function loadReviews() {
-    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
-    reviews.forEach(review => {
-        const reviewElement = document.createElement('li');
-        reviewElement.innerHTML = `
-            <strong>${review.bookTitle} by ${review.authorName}</strong> <br>
-            Rating: ${review.rating} <br>
-            <p>${review.userReview}</p>
-        `;
-        document.getElementById('reviews-list').appendChild(reviewElement);
-    });  // Added missing closing brace here for forEach
+    const reviewsRef = ref(db, 'reviews');
+    get(reviewsRef)
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                const reviews = snapshot.val();
+                for (const key in reviews) {
+                    const review = reviews[key];
+                    const reviewElement = document.createElement('li');
+                    reviewElement.innerHTML = `
+                        <strong>${review.bookTitle} by ${review.authorName}</strong> <br>
+                        Rating: ${review.rating} <br>
+                        <p>${review.userReview}</p>
+                    `;
+                    document.getElementById('reviews-list').appendChild(reviewElement);
+                }
+            } else {
+                console.log("No reviews found.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching reviews:", error);
+        });
 }
 
-// Load reviews and votes when the page loads
+// Load reviews when the page loads
 window.onload = () => {
-    loadReviews(); // Load reviews from localStorage
-    loadVotes(); // Load voting data
-    initializeGenreCarousel('#genre-carousel'); // Initialize genre carousel
+    loadReviews(); // Load reviews from Firebase
 };
