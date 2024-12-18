@@ -886,6 +886,7 @@ button:hover {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
 
 form {
@@ -898,11 +899,13 @@ label {
 }
 
 input, textarea {
-    padding: 20px;
+    padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 15px;
+    width: 100%; /* Ensure input and textarea take full width */
+    box-sizing: border-box; /* Include padding and border within width */
 }
 
 button {
@@ -949,6 +952,7 @@ button:hover {
         font-size: 14px; /* Adjust font size on smaller screens */
     }
 }
+
 
   
 /* Contact Form*/
