@@ -824,8 +824,8 @@ button:hover {
 }
 
 #reviews-container {
-    padding: 20px;
-    width: 80%;
+    padding: 25px;
+    width: 100%;
     max-width: 800px; /* Adjust max width for better layout */
     margin: 50px auto;
     background-color: #d5bdaf;
