@@ -192,6 +192,10 @@ button.next {
     text-decoration: none;
 }
 
+.review-button a{
+    text-decoration: none;
+}
+
 .review-button:hover {
     font-size: 15px;
     background-color: #D5BDAF

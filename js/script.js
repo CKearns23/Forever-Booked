@@ -47,7 +47,7 @@ function vote(bookId) {
 // Save votes to localStorage
 function saveVotes() {
     if (typeof(Storage) !== "undefined") {
-        localStorage.setItem('votes', JSON.stringify(votes));
+        localStorage.setItem('votes', JSON.stringify(votes));  // Save votes to localStorage
     } else {
         console.error("localStorage is not available");
     }
@@ -60,6 +60,7 @@ function loadVotes() {
         if (savedVotes) {
             Object.assign(votes, savedVotes);
 
+            // Update the displayed vote counts
             for (const bookId in votes) {
                 const voteCountElement = document.getElementById(`${bookId}-votes`);
                 if (voteCountElement) {
@@ -71,6 +72,14 @@ function loadVotes() {
         console.error("localStorage is not available");
     }
 }
+
+// Ensure that the vote buttons are correctly hooked up
+document.querySelectorAll('.vote-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const bookId = button.getAttribute('data-book-id');
+        vote(bookId);
+    });
+});
 
 // Genre Carousel Functionality
 function initializeGenreCarousel(carouselSelector, cardWidth = 150, gap = 20) {
@@ -128,6 +137,7 @@ function initializeGenreCarousel(carouselSelector, cardWidth = 150, gap = 20) {
     const initialOffset = (cardWidth + gap) * currentCarouselIndex;
     carouselCards.style.transform = `translateX(-${initialOffset}px)`;
 
+    // Ensure the 'next' and 'prev' buttons are hooked up
     carousel.querySelector('.next').addEventListener('click', nextCarousel);
     carousel.querySelector('.prev').addEventListener('click', prevCarousel);
 }
