@@ -223,15 +223,18 @@ function saveReviewToFirebase(review) {
 function loadReviewsFromFirebase() {
     getDocs(collection(db, "reviews"))
     .then(querySnapshot => {
+        const reviewsList = document.getElementById('reviews-list');
         querySnapshot.forEach(doc => {
             const review = doc.data();
-            const reviewElement = document.createElement('li');
-            reviewElement.innerHTML = `
-                <strong>${review.bookTitle} by ${review.authorName}</strong><br>
-                Rating: ${review.rating}<br>
-                <p>${review.userReview}</p>
-            `;
-            document.getElementById('reviews-list').appendChild(reviewElement);
+            if (![...reviewsList.children].some(e => e.textContent.includes(review.bookTitle))) {
+                const reviewElement = document.createElement('li');
+                reviewElement.innerHTML = `
+                    <strong>${review.bookTitle} by ${review.authorName}</strong><br>
+                    Rating: ${review.rating}<br>
+                    <p>${review.userReview}</p>
+                `;
+                reviewsList.appendChild(reviewElement);
+            }
         });
     })
     .catch(error => {
@@ -247,7 +250,12 @@ document.getElementById('review-form').addEventListener('submit', function(event
     const bookTitle = document.getElementById('book-title').value;
     const authorName = document.getElementById('author-name').value;
     const userReview = document.getElementById('user-review').value;
-    const rating = document.getElementById('rating').value;
+    const rating = parseInt(document.getElementById('rating').value);
+
+    if (isNaN(rating) || rating < 1 || rating > 5) {
+        alert("Please provide a valid rating between 1 and 5.");
+        return;
+    }
 
     const newReview = {
         bookTitle,
