@@ -35,226 +35,56 @@
                 </div>
             </div>
         </div>
-    </section>
 
-
-    <section id="voting-section" class="voting-section">
-        <div class="container">
-            <h2>Vote for the Book of the Month!</h2>
-
-            <!-- Book 1 -->
-            <div class="voting-box" id="book1">
-                <div class="book-details">
-                    <img src="Images/Rupi Kaur/milkandhoney.jpg" alt="Milk and Honey">
-                    <h3>Milk and Honey</h3>
-                </div>
-                <div class="voting-controls">
-                    <button class="vote-btn" onclick="vote('book1')">Vote</button>
-                    <p id="book1-votes" class="vote-count">0</p>
-                </div>
+        <div class="vote-section">
+            <h2>Vote for Your Favorite Book</h2>
+            <div class="book" id="book1">
+                <h3>Book 1</h3>
+                <button onclick="vote('book1')">Vote</button>
+                <p>Votes: <span id="book1-votes">0</span></p>
             </div>
-
-            <!-- Book 2 -->
-            <div class="voting-box" id="book2">
-                <div class="book-details">
-                    <img src="Images/Colleen Hoover/itendswithus.jpg" alt="It Ends With Us">
-                    <h3>It Ends With Us</h3>
-                </div>
-                <div class="voting-controls">
-                    <button class="vote-btn" onclick="vote('book2')">Vote</button>
-                    <p id="book2-votes" class="vote-count">0</p>
-                </div>
+            <div class="book" id="book2">
+                <h3>Book 2</h3>
+                <button onclick="vote('book2')">Vote</button>
+                <p>Votes: <span id="book2-votes">0</span></p>
             </div>
-
-            <!-- Book 3 -->
-            <div class="voting-box" id="book3">
-                <div class="book-details">
-                    <img src="Images/Ana Huang/thestriker.jpg" alt="The Striker">
-                    <h3>The Striker</h3>
-                </div>
-                <div class="voting-controls">
-                    <button class="vote-btn" onclick="vote('book3')">Vote</button>
-                    <p id="book3-votes" class="vote-count">0</p>
-                </div>
+            <div class="book" id="book3">
+                <h3>Book 3</h3>
+                <button onclick="vote('book3')">Vote</button>
+                <p>Votes: <span id="book3-votes">0</span></p>
             </div>
         </div>
-    </section>
 
-
-    <section class="latest-reviews">
-        <h1>Latest Reviews</h1>
-        <div class="latest-reviews-container">
-            <div class="slider-wrapper">
-                <div class="card-list">
-                    <div class="card-item">
-                        <h3>The Housemaid by Frieda McFadden</h3>
-                        <p>The Housemaid by Frieda McFadden delivers a twisty, suspenseful thriller with compelling
-                            characters and a page-turning plot. The story follows Millie, a woman recently released from
-                            prison, who takes a job as a housemaid for a wealthy family. What starts as a seemingly
-                            innocent arrangement quickly escalates into a dark and dangerous game of manipulation and
-                            deceit. McFadden masterfully builds tension, keeping readers on edge with each chapter.
-                            However, some of the twists feel a bit far-fetched, and the characterization of the main
-                            villain can be over the top at times. Despite these minor flaws, The Housemaid is a gripping
-                            read that will keep you hooked until the very end, making it a perfect pick for fans of
-                            psychological thrillers.</p>
-                        <a href="thehousemaid.html" class="review-button">Go to Book</a>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-wrapper">
-                <div class="card-list">
-                    <div class="card-item">
-                        <h3>Twisted Love by Ana Huang</h3>
-                        <p>Ana Huang’s Twisted Love has the makings of a steamy romance, but it ultimately falls short
-                            in delivering a truly satisfying story. The plot centers around Ava and Alex, childhood
-                            friends turned lovers, and their complicated dynamic filled with jealousy, betrayal, and
-                            passion. The chemistry between the characters is undeniable, but the story leans heavily
-                            into clichés and overused tropes, making it feel predictable at times. Alex’s possessiveness
-                            and the back-and-forth between the two characters can become exhausting rather than
-                            captivating. While there are moments of genuine emotion and passion, Twisted Love doesn’t
-                            quite offer the depth or originality that readers may expect from a romance novel. It's an
-                            enjoyable read for those who enjoy drama-filled love stories, but it may leave others
-                            craving something more unique.</p>
-                        <a href="twistedlove.html" class="review-button">Go to Book</a>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-wrapper">
-                <div class="card-list">
-                    <div class="card-item">
-                        <h3>It Ends With Us by Colleen Hoover</h3>
-                        <p>Colleen Hoover’s It Ends With Us is a raw, emotional rollercoaster that tackles difficult
-                            topics with sensitivity and depth. The novel follows Lily Bloom, a young woman caught in a
-                            toxic, abusive relationship, and her journey of self-discovery and healing. Hoover's writing
-                            is gripping, and her portrayal of the complexities of love and abuse is both heartbreaking
-                            and inspiring. The characters feel real and relatable, and the story's emotional weight
-                            lingers long after the last page. While some may find certain aspects of the plot
-                            predictable, the emotional impact of the story is undeniable. It Ends With Us is an
-                            important read, shedding light on difficult but necessary conversations about love, respect,
-                            and personal strength.</p>
-                        <a href="itendswithus.html" class="review-button">Go to Book</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Popular Genres Section -->
-    <section id="popular-genres" class="popular-genres">
-        <h2>Popular Genres</h2>
-
-        <!-- Carousel for cards -->
-        <div id="genre-carousel" class="carousel">
+        <div class="genre-carousel-section" id="genre-carousel">
             <div class="carousel-cards">
-                <div class="carousel-card-genre">Romance</div>
-                <div class="carousel-card-genre">Dark Romance</div>
-                <div class="carousel-card-genre">Mystery</div>
-                <div class="carousel-card-genre">Thriller</div>
-                <div class="carousel-card-genre">Horror</div>
                 <div class="carousel-card-genre">Fantasy</div>
+                <div class="carousel-card-genre">Romance</div>
+                <div class="carousel-card-genre">Horror</div>
                 <div class="carousel-card-genre">Science Fiction</div>
-                <div class="carousel-card-genre">Poetry</div>
-                <div class="carousel-card-genre">Comics</div>
-                <div class="carousel-card-genre">Young Adult</div>
             </div>
-            <!-- Navigation Buttons -->
-            <button class="prev" onclick="prevCarousel()">&#10094;</button>
-            <button class="next" onclick="nextCarousel()">&#10095;</button>
-        </div>
-        <a href="genres.html">
-            <button class="explore-more">Explore More</button>
-        </a>
-    </section>
-
-    <!-- Popular Authors Section -->
-    <section class="popular-authors">
-        <h2>Popular Authors</h2>
-
-        <!-- Cards Grid -->
-        <div class="author-grid">
-            <!-- Card 1 -->
-            <div class="card-author">
-                <a href="anahuang.html">
-                    <img src="Images/Ana Huang/anahuang.jpg" alt="Ana Huang">
-                </a>
-                <h1 class="card-author-name">Ana Huang</h1>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="card-author">
-                <a href="juliaquinn.html">
-                    <img src="Images/Julia Quinn/juliaquinn.jpg" alt="Julia Quinn">
-                </a>
-                <h1 class="card-author-name">Julia Quinn</h1>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="card-author">
-                <a href="hdcarlton.html">
-                    <img src="Images/H.D. Carlton/hdcarlton.jpg" alt="H.D. Carlton">
-                </a>
-                <h1 class="card-author-name">H.D. Carlton</h1>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="card-author">
-                <a href="penelopedouglas.html">
-                    <img src="Images/Penelope Douglas/penelopedouglas.jpg" alt="Penelope Douglas">
-                </a>
-                <h1 class="card-author-name">Penelope Douglas</h1>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="card-author">
-                <a href="colleenhoover.html">
-                    <img src="Images/Colleen Hoover/colleenhoover.jpg" alt="Colleen Hoover">
-                </a>
-                <h1 class="card-author-name">Colleen Hoover</h1>
-            </div>
-            <!-- Card 6 -->
-            <div class="card-author">
-                <a href="kasiewest.html">
-                    <img src="Images/Kasie West/kasiewest.jpg" alt="Kasie West">
-                </a>
-                <h1 class="card-author-name">Kasie West</h1>
-            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
         </div>
 
-
-        <!-- Explore More Button -->
-        <a href="authors.html">
-            <button class="explore-more">Explore More</button>
-        </a>
-    </section>
-
-
-
-
-    <section class="bookrec-chat">
-        <div id="chatbox" class="chatbox">
-            Not sure what to read next? Tell me your favorite genre, and I’ll do the rest!
+        <div class="chatbot">
+            <div id="chatbox"></div>
+            <input type="text" id="user-input" placeholder="Enter genre...">
+            <button onclick="getRecommendation()">Get Recommendation</button>
         </div>
-        
-        <!-- Adding a label for the input field -->
-        <label for="user-input" class="sr-only">Enter a genre</label>
-        <input type="text" id="user-input" placeholder="Enter a genre..." />
-        
-        <!-- Adding aria-label for the button -->
-        <button onclick="getRecommendation()" aria-label="Get book recommendation based on genre">Get Recommendation</button>
+
+        <div class="reviews-section">
+            <h3>Book Reviews</h3>
+            <form id="review-form">
+                <input type="text" id="book-title" placeholder="Book Title" required>
+                <input type="text" id="author-name" placeholder="Author Name" required>
+                <textarea id="user-review" placeholder="Your Review" required></textarea>
+                <input type="number" id="rating" min="1" max="5" placeholder="Rating (1-5)" required>
+                <button type="submit">Submit Review</button>
+            </form>
+            <div id="thank-you-message" style="display:none;">Thank you for your review!</div>
+            <ul id="reviews-list"></ul>
+        </div>
     </section>
-    
-
-    <footer class="footer-nav bg-light py-4">
-        <nav>
-            <ul class="nav justify-content-center mb-3 flex-column flex-sm-row">
-                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-            </ul>
-            <p class="copyright text-center mb-0">Forever Booked © 2024</p>
-        </nav>
-    </footer>
-
- <script type="module" src="js/script.js"></script>
 </body>
 
 </html>
