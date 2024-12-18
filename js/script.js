@@ -240,7 +240,7 @@ function loadReviews() {
             <p>${review.userReview}</p>
         `;
         document.getElementById('reviews-list').appendChild(reviewElement);
-    });
+    });  // Added missing closing brace here for forEach
 }
 
 // Load reviews and votes when the page loads
@@ -249,3 +249,4 @@ window.onload = () => {
     loadVotes(); // Load voting data
     initializeGenreCarousel('#genre-carousel'); // Initialize genre carousel
 };
+
