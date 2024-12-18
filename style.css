@@ -791,7 +791,7 @@ button:hover {
 }
 
 .book-details img {
-    width: 250px;
+    width: 200px;
     height: 250px;
     margin-right: 10px;
     padding: 15px;
@@ -818,13 +818,15 @@ button:hover {
 }
 
 /* Review List Styling */
-.reviews-container{
+.reviews-container {
     background-color: #c89f9c;
     padding: 15px;
 }
+
 #reviews-container {
     padding: 20px;
     width: 80%;
+    max-width: 800px; /* Adjust max width for better layout */
     margin: 50px auto;
     background-color: #d5bdaf;
     border-radius: 8px;
@@ -849,7 +851,7 @@ button:hover {
 
 #reviews-list li {
     padding: 15px;
-    margin: 10px;
+    margin: 10px 0;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -870,12 +872,13 @@ button:hover {
     color: #666;
 }
 
-.book-review{
+/* Book Review Form Styling */
+.book-review {
     background-color: #efe5dc;
-    padding:15px;
+    padding: 15px;
 }
 
-  #book-review {
+#book-review {
     background-color: #D5BDAF;
     width: 80%;
     max-width: 600px;
@@ -883,26 +886,26 @@ button:hover {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-  }
-  
-  form {
+}
+
+form {
     display: flex;
     flex-direction: column;
-  }
-  
-  label {
+}
+
+label {
     margin: 10px 0 5px;
-  }
-  
-  input, textarea {
+}
+
+input, textarea {
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 15px;
-  }
-  
-  button {
+}
+
+button {
     padding: 10px;
     border: none;
     background-color: #c89f9c;
@@ -910,19 +913,43 @@ button:hover {
     font-size: 15px;
     border-radius: 8px;
     cursor: pointer;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background-color: #efe5dc;
     font-size: 15px;
-  }
-  
-  #thank-you-message {
+}
+
+#thank-you-message {
     text-align: center;
     background-color: #efe5dc;
     padding: 10px;
     border-radius: 4px;
-  }
+    display: none; /* Hidden by default */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    #reviews-container, #book-review {
+        width: 95%; /* Make the containers take up more space on smaller screens */
+    }
+
+    form {
+        width: 100%; /* Ensure form elements take up full width on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    #reviews-container, #book-review {
+        width: 100%; /* Full width on very small screens */
+        padding: 15px; /* Less padding for smaller screens */
+    }
+
+    form label, input, textarea, button {
+        font-size: 14px; /* Adjust font size on smaller screens */
+    }
+}
+
   
 /* Contact Form*/
 .contact-form-section {
