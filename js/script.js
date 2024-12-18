@@ -215,6 +215,7 @@ function saveReviewToFirebase(review) {
     })
     .catch(error => {
         console.error("Error adding review: ", error);
+        alert("There was an error saving your review. Please try again.");
     });
 }
 
@@ -235,6 +236,7 @@ function loadReviewsFromFirebase() {
     })
     .catch(error => {
         console.error("Error loading reviews: ", error);
+        alert("There was an error loading the reviews. Please try again.");
     });
 }
 
