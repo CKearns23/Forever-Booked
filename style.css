@@ -918,33 +918,65 @@ button:hover {
   
   #thank-you-message {
     text-align: center;
-    background-color: #e0ffe0;
+    background-color: #efe5dc;
     padding: 10px;
     border-radius: 4px;
   }
   
-
-  .contact-form {
+/* Form container */
+.contact-form {
     max-width: 600px;
-    margin: 0 auto;
-    border: 1px solid #ddd;
+    margin: 20px auto;
     padding: 20px;
+    border: 2px solid #d5bdaf; /* Muted beige border */
     border-radius: 8px;
-    background-color: #efe5dc;
+    background-color: #efe5dc; /* Light cream background */
 }
 
+/* Form heading */
+.contact-form h1 {
+    font-size: 1.8rem;
+    text-align: center;
+    color: #c89f9c; /* Soft rose for the heading */
+    margin-bottom: 15px;
+}
+
+/* Labels */
 .contact-form .form-label {
     font-weight: bold;
+    color: #c89f9c; /* Matches heading */
+    margin-bottom: 5px;
+    display: block;
 }
 
+/* Input fields */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d5bdaf; /* Muted beige for border */
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #ffffff; /* White for contrast */
+    color: #333; /* Dark text */
+}
+
+/* Submit button */
 .contact-form .btn {
     width: 100%;
-    background-color: #C89F9C;
-    color: #000000;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff; /* White text */
+    background-color: #c89f9c; /* Soft rose background */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
+/* Button hover effect */
 .contact-form .btn:hover {
-    background-color: #d5bdaf;
+    background-color: #d5bdaf; /* Muted beige */
 }
-
-  
