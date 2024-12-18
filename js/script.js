@@ -1,3 +1,27 @@
+// Import necessary Firebase SDKs
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-storage.js";
+
+// Firebase configuration object
+const firebaseConfig = {
+  apiKey: "AIzaSyCPUGRaYHqYL8PqwZiP3YF0fqo3BHBSl-s",
+  authDomain: "forever-booked-reviews.firebaseapp.com",
+  projectId: "forever-booked-reviews",
+  storageBucket: "forever-booked-reviews.firebasestorage.app",
+  messagingSenderId: "85969718480",
+  appId: "1:85969718480:web:b7356ec352edcd993fa2d5",
+  measurementId: "G-Z1DPQSXGKE"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+// Initialize the first slide index
 let slideIndex = 0;
 
 // Show slide based on index
@@ -183,23 +207,36 @@ function addChatMessage(message) {
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
+// Save review to Firestore
+function saveReviewToFirebase(review) {
+    addDoc(collection(db, "reviews"), review)
+    .then(docRef => {
+        console.log("Review added with ID: ", docRef.id);
+    })
+    .catch(error => {
+        console.error("Error adding review: ", error);
+    });
+}
 
-// Initialize Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getDatabase, ref, push, get, child } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+// Load reviews from Firestore
+function loadReviewsFromFirebase() {
+    getDocs(collection(db, "reviews"))
+    .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+            const review = doc.data();
+            const reviewElement = document.createElement('li');
+            reviewElement.innerHTML = `
+                <strong>${review.bookTitle} by ${review.authorName}</strong><br>
+                Rating: ${review.rating}<br>
+                <p>${review.userReview}</p>
+            `;
+            document.getElementById('reviews-list').appendChild(reviewElement);
+        });
+    })
+    .catch(error => {
+        console.error("Error loading reviews: ", error);
+    });
+}
 
 // Handle form submission for book reviews
 document.getElementById('review-form').addEventListener('submit', function(event) {
@@ -218,7 +255,16 @@ document.getElementById('review-form').addEventListener('submit', function(event
     };
 
     // Save review to Firebase
-    saveReview(newReview);
+    saveReviewToFirebase(newReview);
+
+    // Display the review on the page
+    const newReviewElement = document.createElement('li');
+    newReviewElement.innerHTML = `
+        <strong>${bookTitle} by ${authorName}</strong><br>
+        Rating: ${rating}<br>
+        <p>${userReview}</p>
+    `;
+    document.getElementById('reviews-list').appendChild(newReviewElement);
 
     // Clear form fields
     document.getElementById('book-title').value = '';
@@ -233,39 +279,9 @@ document.getElementById('review-form').addEventListener('submit', function(event
     }, 3000);
 });
 
-// Save review to Firebase
-function saveReview(review) {
-    const reviewsRef = ref(db, 'reviews');
-    push(reviewsRef, review); // Pushes a new review to the database
-}
-
-// Load reviews from Firebase
-function loadReviews() {
-    const reviewsRef = ref(db, 'reviews');
-    get(reviewsRef)
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                const reviews = snapshot.val();
-                for (const key in reviews) {
-                    const review = reviews[key];
-                    const reviewElement = document.createElement('li');
-                    reviewElement.innerHTML = `
-                        <strong>${review.bookTitle} by ${review.authorName}</strong> <br>
-                        Rating: ${review.rating} <br>
-                        <p>${review.userReview}</p>
-                    `;
-                    document.getElementById('reviews-list').appendChild(reviewElement);
-                }
-            } else {
-                console.log("No reviews found.");
-            }
-        })
-        .catch((error) => {
-            console.error("Error fetching reviews:", error);
-        });
-}
-
-// Load reviews when the page loads
+// Load reviews and votes when the page loads
 window.onload = () => {
-    loadReviews(); // Load reviews from Firebase
+    loadReviewsFromFirebase(); // Load reviews from Firestore
+    loadVotes(); // Load voting data
+    initializeGenreCarousel('#genre-carousel'); // Initialize genre carousel
 };
