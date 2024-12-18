@@ -1,5 +1,6 @@
 let slideIndex = 0;
 
+// Function to show the current slide
 function showSlide(index) {
     const slides = document.querySelectorAll('.slides img');
     if (index >= slides.length) slideIndex = 0;
@@ -9,11 +10,13 @@ function showSlide(index) {
     });
 }
 
+// Move to the next slide
 function nextSlide() {
     slideIndex++;
     showSlide(slideIndex);
 }
 
+// Move to the previous slide
 function prevSlide() {
     slideIndex--;
     showSlide(slideIndex);
@@ -217,16 +220,17 @@ document.getElementById('review-form').addEventListener('submit', function(event
     event.preventDefault(); // Prevents form from submitting the traditional way
 
     const userReview = document.getElementById('user-review').value; // Get the user's review
-    const newReview = document.createElement('p'); // Creates a new paragraph element
-    newReview.textContent = userReview; // Sets the text of the new review to what the user typed
+    const newReview = document.createElement('li'); // Create a new list item for the review
+    newReview.textContent = userReview; // Set the text of the new review to what the user typed
 
-    // Append the new review to the reviews section
-    document.getElementById('reviews-section').appendChild(newReview);
+    // Append the new review to the reviews list in the "What Readers Are Saying" section
+    document.getElementById('reviews-list').appendChild(newReview);
 
     // Clear the input field after submission
     document.getElementById('user-review').value = '';
 });
 
+// Form validation for the contact form
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contactForm');
 
