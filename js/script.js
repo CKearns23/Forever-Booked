@@ -1,25 +1,106 @@
 // Import necessary Firebase SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-storage.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 // Firebase configuration object
 const firebaseConfig = {
-  apiKey: "AIzaSyCPUGRaYHqYL8PqwZiP3YF0fqo3BHBSl-s",
-  authDomain: "forever-booked-reviews.firebaseapp.com",
-  projectId: "forever-booked-reviews",
-  storageBucket: "forever-booked-reviews.firebasestorage.app",
-  messagingSenderId: "85969718480",
-  appId: "1:85969718480:web:b7356ec352edcd993fa2d5",
-  measurementId: "G-Z1DPQSXGKE"
+    apiKey: "AIzaSyCPUGRaYHqYL8PqwZiP3YF0fqo3BHBSl-s",
+    authDomain: "forever-booked-reviews.firebaseapp.com",
+    projectId: "forever-booked-reviews",
+    storageBucket: "forever-booked-reviews.firebasestorage.app",
+    messagingSenderId: "85969718480",
+    appId: "1:85969718480:web:b7356ec352edcd993fa2d5",
+    measurementId: "G-Z1DPQSXGKE"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const db = getFirestore(app);
-const storage = getStorage(app);
+
+// Handle form submission for book reviews
+document.getElementById('review-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    // Get the form data
+    const bookTitle = document.getElementById('book-title').value;
+    const authorName = document.getElementById('author-name').value;
+    const userReview = document.getElementById('user-review').value;
+    const rating = parseInt(document.getElementById('rating').value);
+
+    // Validate rating
+    if (isNaN(rating) || rating < 1 || rating > 5) {
+        alert("Please provide a valid rating between 1 and 5.");
+        return;
+    }
+
+    // Create a review object
+    const newReview = {
+        bookTitle,
+        authorName,
+        userReview,
+        rating,
+        timestamp: new Date()
+    };
+
+    // Save the review to Firebase Firestore
+    addDoc(collection(db, "reviews"), newReview)
+        .then((docRef) => {
+            console.log("Review added with ID: ", docRef.id);
+
+            // Display the review on the page
+            const newReviewElement = document.createElement('li');
+            newReviewElement.innerHTML = `
+            <strong>${bookTitle} by ${authorName}</strong><br>
+            Rating: ${rating}<br>
+            <p>${userReview}</p>
+        `;
+            document.getElementById('reviews-list').appendChild(newReviewElement);
+
+            // Clear form fields
+            document.getElementById('book-title').value = '';
+            document.getElementById('author-name').value = '';
+            document.getElementById('user-review').value = '';
+            document.getElementById('rating').value = '';
+
+            // Show thank you message
+            document.getElementById('thank-you-message').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('thank-you-message').style.display = 'none';
+            }, 3000);
+        })
+        .catch((error) => {
+            console.error("Error adding review: ", error);
+            alert("There was an error saving your review. Please try again.");
+        });
+});
+
+// Load reviews from Firestore when the page loads
+window.onload = () => {
+    loadReviewsFromFirebase();
+};
+
+// Load reviews from Firebase Firestore
+function loadReviewsFromFirebase() {
+    const reviewsList = document.getElementById('reviews-list');
+    // Fetch reviews from Firestore
+    getDocs(collection(db, "reviews"))
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const review = doc.data();
+                const reviewElement = document.createElement('li');
+                reviewElement.innerHTML = `
+                <strong>${review.bookTitle} by ${review.authorName}</strong><br>
+                Rating: ${review.rating}<br>
+                <p>${review.userReview}</p>
+            `;
+                reviewsList.appendChild(reviewElement);
+            });
+        })
+        .catch((error) => {
+            console.error("Error loading reviews: ", error);
+            alert("There was an error loading the reviews. Please try again.");
+        });
+}
 
 // Initialize the first slide index
 let slideIndex = 0;
@@ -70,7 +151,7 @@ function vote(bookId) {
 
 // Save votes to localStorage
 function saveVotes() {
-    if (typeof(Storage) !== "undefined") {
+    if (typeof (Storage) !== "undefined") {
         localStorage.setItem('votes', JSON.stringify(votes));
     } else {
         console.error("localStorage is not available");
@@ -79,7 +160,7 @@ function saveVotes() {
 
 // Load votes from localStorage
 function loadVotes() {
-    if (typeof(Storage) !== "undefined") {
+    if (typeof (Storage) !== "undefined") {
         const savedVotes = JSON.parse(localStorage.getItem('votes'));
         if (savedVotes) {
             Object.assign(votes, savedVotes);
@@ -158,7 +239,7 @@ function initializeGenreCarousel(carouselSelector, cardWidth = 150, gap = 20) {
 
 // Book recommendation chatbot
 let currentStep = 0;
-let recommendations = {}; 
+let recommendations = {};
 
 fetch('books.json')
     .then(response => response.json())
@@ -210,41 +291,41 @@ function addChatMessage(message) {
 // Save review to Firestore
 function saveReviewToFirebase(review) {
     addDoc(collection(db, "reviews"), review)
-    .then(docRef => {
-        console.log("Review added with ID: ", docRef.id);
-    })
-    .catch(error => {
-        console.error("Error adding review: ", error);
-        alert("There was an error saving your review. Please try again.");
-    });
+        .then(docRef => {
+            console.log("Review added with ID: ", docRef.id);
+        })
+        .catch(error => {
+            console.error("Error adding review: ", error);
+            alert("There was an error saving your review. Please try again.");
+        });
 }
 
 // Load reviews from Firestore
 function loadReviewsFromFirebase() {
     getDocs(collection(db, "reviews"))
-    .then(querySnapshot => {
-        const reviewsList = document.getElementById('reviews-list');
-        querySnapshot.forEach(doc => {
-            const review = doc.data();
-            if (![...reviewsList.children].some(e => e.textContent.includes(review.bookTitle))) {
-                const reviewElement = document.createElement('li');
-                reviewElement.innerHTML = `
+        .then(querySnapshot => {
+            const reviewsList = document.getElementById('reviews-list');
+            querySnapshot.forEach(doc => {
+                const review = doc.data();
+                if (![...reviewsList.children].some(e => e.textContent.includes(review.bookTitle))) {
+                    const reviewElement = document.createElement('li');
+                    reviewElement.innerHTML = `
                     <strong>${review.bookTitle} by ${review.authorName}</strong><br>
                     Rating: ${review.rating}<br>
                     <p>${review.userReview}</p>
                 `;
-                reviewsList.appendChild(reviewElement);
-            }
+                    reviewsList.appendChild(reviewElement);
+                }
+            });
+        })
+        .catch(error => {
+            console.error("Error loading reviews: ", error);
+            alert("There was an error loading the reviews. Please try again.");
         });
-    })
-    .catch(error => {
-        console.error("Error loading reviews: ", error);
-        alert("There was an error loading the reviews. Please try again.");
-    });
 }
 
 // Handle form submission for book reviews
-document.getElementById('review-form').addEventListener('submit', function(event) {
+document.getElementById('review-form').addEventListener('submit', function (event) {
     event.preventDefault();
 
     const bookTitle = document.getElementById('book-title').value;
